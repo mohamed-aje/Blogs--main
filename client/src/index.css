@@ -18,14 +18,16 @@
 }
 html {
   height: 100%;
+  font-family: serif;
+
 }
 body {
   margin:0;
   padding:0;
   background: center / contain   url("./assets/diego-ph-5LOhydOtTKU-unsplash.jpg") ;
-  font-family: serif;
   background-size: cover;
 }
 :root {
   --bg-color:linear-gradient(#737579, #1c469f);
+  --font-family:arial
 }

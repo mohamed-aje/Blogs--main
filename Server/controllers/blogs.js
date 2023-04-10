@@ -65,9 +65,11 @@ blogsRouter.delete(
     if (blog) {
       if (blog.user.toString() === user.id.toString()) {
         await Blog.findByIdAndRemove(request.params.id);
-        response.status(204).end();
+        response.status(200).json(`Blog deleted with ID: ${user.id}`).end();
       } else {
-        return response.status(401).json({ error: "wrong autorization" });
+        return response
+          .status(401)
+          .json({ error: "This Action cannot be done!" });
       }
     } else {
       return response.status(401).json({ error: "Unexisting id" });

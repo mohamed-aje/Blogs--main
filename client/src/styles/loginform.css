@@ -13,7 +13,9 @@
   border-radius: 10px;
 }
 .text-container{
-  background: linear-gradient(to right, #D05867 30%, #1F313B 70%);
+  /* background: linear-gradient(to right, #D05867 30%, #1F313B 70%); */
+  background: center / contain   url("../assets/diego-ph-5LOhydOtTKU-unsplash.jpg") ;
+  
 
 }
 .login-box h2{
@@ -22,7 +24,7 @@
   background-color: #fff;
   text-align: center;
   mix-blend-mode:screen;
-border-radius: 4px;
+  border-radius: 8px; 
   
   
 
@@ -82,7 +84,7 @@ border-radius: 4px;
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;
-  box-shadow: 10px 10px 0px #20323D;
+  box-shadow: 10px 10px 0px #D56068;
 
   top:-5px;
   left: -5px;
@@ -97,7 +99,6 @@ border-radius: 4px;
   display: block;
   background-color: var(--bg-color);
   border: none;
-  font-family: 'Courier New', Courier, monospace;
   font-weight: 800;
   font-size: large;
   color: #fff;
