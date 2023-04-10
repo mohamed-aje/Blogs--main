@@ -10,12 +10,6 @@ import { authActions } from "./store";
 import { Navbar } from "react-bootstrap";
 
 const App = () => {
-  console.log(localStorage);
-
-  const logout = () => {
-    dispatch(authActions.logout());
-  };
-
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   useEffect(() => {
@@ -27,7 +21,6 @@ const App = () => {
   return (
     <React.Fragment>
       <main>
-        <MainNav logout={logout} />
         <Routes>
           <Route
             path="/login"

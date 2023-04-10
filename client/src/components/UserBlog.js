@@ -3,6 +3,9 @@ import blogService from "../services/blogs";
 import Blog from "./Blog";
 import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
+import MainNav from "./Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store";
 
 const UserBlog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -10,6 +13,11 @@ const UserBlog = () => {
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
   const [message, setMessage] = useState(null);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(authActions.logout());
+  };
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -85,6 +93,8 @@ const UserBlog = () => {
 
   return (
     <div className="container">
+      <MainNav logout={logout} />
+
       <Togglable buttonLabel="new blog" name="cancel">
         <BlogForm
           handleblog={addBlog}

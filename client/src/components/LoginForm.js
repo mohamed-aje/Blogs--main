@@ -25,7 +25,7 @@ const LoginForm = () => {
         .then((data) => localStorage.setItem("token", data.token))
         .then(() => {
           dispatch(authActions.signin());
-          navigate("/login");
+          navigate("/blogs");
         });
     } catch (exception) {
       setMessage("Wrong credentials");
@@ -38,7 +38,9 @@ const LoginForm = () => {
   return (
     <div className="login-box">
       <p style={{ color: "white" }}>{message}</p>
-      <h2>Blogs Login</h2>
+      <div className="text-container">
+        <h2>Blogs Login</h2>
+      </div>
       <form onSubmit={handleLogin}>
         <div className="user-box">
           <input
@@ -62,7 +64,7 @@ const LoginForm = () => {
         </div>
         <div className="signup">
           <p className="signup-text">
-            Don't Have an account? <Link to="/signup">Sign up</Link>
+            Don't have an account? <Link to="/signup">Sign up</Link>
           </p>
         </div>
         <a className="login-link">

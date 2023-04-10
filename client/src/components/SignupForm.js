@@ -27,8 +27,8 @@ const SignupForm = () => {
         })
         .then(() => {
           setMessage("You've Successfully signed up!");
-          navigate("/login");
         });
+      navigate("/login");
     } catch (exception) {
       setMessage("wrong credentials");
       setTimeout(() => {
@@ -40,7 +40,9 @@ const SignupForm = () => {
   return (
     <div className="login-box">
       <p style={{ color: "white" }}>{message}</p>
-      <h2>Blogs Register</h2>
+      <div className="text-container">
+        <h2>Blogs Register</h2>
+      </div>{" "}
       <form onSubmit={handleSubmit}>
         <div className="user-box">
           <input
