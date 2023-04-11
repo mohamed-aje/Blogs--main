@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
-  firstname: String,
-  lastname: String,
-  email: String,
-  passwordHash: { type: String, minlength: 3 },
-  blogs: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Blog",
-    },
-  ],
-});
+const userSchema = new mongoose.Schema(
+  {
+    firstname: String,
+    lastname: String,
+    email: String,
+    passwordHash: { type: String, minlength: 3 },
+    blogs: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Blog",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();

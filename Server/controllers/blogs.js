@@ -39,6 +39,7 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
     author: body.author,
     url: body.url,
     likes: body.likes,
+    content: body.content,
     user: user._id,
   });
   try {
@@ -84,6 +85,7 @@ blogsRouter.put("/:id", (request, response, next) => {
     title: body.title,
     author: body.author,
     url: body.url,
+    content: body.content,
     likes: body.likes,
   };
 
