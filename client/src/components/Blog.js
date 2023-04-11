@@ -1,31 +1,39 @@
 import React from "react";
 import Togglable from "./Togglable";
+import "../styles/blog.css";
+import { IoThumbsUpOutline } from "react-icons/io5";
+import { Card, Button } from "react-bootstrap";
+import { dt } from "../hooks/date";
 const Blog = ({ blog, addLikes, deleteHandler }) => {
   if (!blog.id) return null;
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: "solid",
-    borderWidth: 1,
-    marginBottom: 5,
-    display: "flex",
-  };
+
   return (
-    <div style={blogStyle} className="card">
-      <div>
-        <div className="blogTitle">{blog.title}</div>
-        <Togglable name="hide" buttonLabel="view">
-          {" "}
-          Author:
-          {blog.author}
-          <br />
-          Url:{blog.url} <br />
-          Likes:{blog.likes}
-          <button onClick={addLikes}>like</button>
-        </Togglable>
-        <button onClick={deleteHandler}>Delete</button>
+    <Card className={"card-grid"}>
+      <Card.Img className="card-image" variant="top" src={blog.url} />
+
+      <Card.Body>
+        <div className="card-title">
+          <p className="title-name"> {blog.title}</p>
+          <p className="author-name">{blog.author}</p>
+        </div>
+        <p className="date">created at: {dt(blog.createdAt)}</p>
+
+        <Card.Text>
+          <p>{blog.content}</p>
+        </Card.Text>
+        <Card.Text>
+          <p>{blog.likes} people like this blog</p>
+        </Card.Text>
+      </Card.Body>
+      <div className="button-group">
+        <Button variant="primary" onClick={deleteHandler}>
+          Delete
+        </Button>
+        <Button variant="primary" onClick={addLikes}>
+          Like
+        </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 

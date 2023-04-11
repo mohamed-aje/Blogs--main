@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "../index.css";
+import "../styles/toggle.css";
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false);
@@ -13,7 +13,7 @@ const Togglable = (props) => {
   };
 
   return (
-    <div>
+    <div className={props.className}>
       <div style={hideWhenVisible}>
         <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
