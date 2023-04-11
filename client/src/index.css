@@ -26,6 +26,7 @@ body {
   padding:0;
   background: center / contain   url("./assets/diego-ph-5LOhydOtTKU-unsplash.jpg") ;
   background-size: cover;
+  box-sizing: border-box;
 }
 :root {
   --bg-color:linear-gradient(#737579, #1c469f);
