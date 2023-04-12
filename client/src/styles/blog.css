@@ -1,74 +1,149 @@
-.card-group {
-    justify-content: center;
+article {
+  --img-scale: 1.001;
+  --title-color: black;
+  --link-icon-translate: -20px;
+  --link-icon-opacity: 0;
+  position: relative;
+  border-radius: 16px;
+  box-shadow: none;
+  background: #fff;
+  transform-origin: center;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
 }
 
-.card-grid, .card {
-    padding: 3rem !important;
-    height: auto !important;
-    justify-content: center;
-    margin: 0 auto;
-
-    
+article a::after {
+  position: absolute;
+  cursor: pointer;
+  content: "";
 }
 
-.card-body {
-    margin: 0;
+
+
+figure {
+  margin: 0;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
-.card-title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0;
+
+article img {
+  max-width: 100%;
+  transform-origin: center;
+  transform: scale(var(--img-scale));
+  transition: transform 0.4s ease-in-out;
 }
-.date{
-    display: flex;
-    justify-content: flex-end;
-    color: lightgray;
-    font-size: 12px;
-    margin: 0 auto;
+
+.article-body {
+  padding: 24px;
+}
+
+article a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #28666e;
+}
+article p {
+  display: inline-flex;
+  align-items: flex-end;
+  text-decoration: none;
+  color: #28666e;
+}
+
+article a:focus {
+  outline: 1px dotted #28666e;
+}
+
+article a .icon {
+  min-width: 24px;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
+  transform: translateX(var(--link-icon-translate));
+  opacity: var(--link-icon-opacity);
+  transition: all 0.3s;
+}
+
+article:has(:hover, :focus) {
+  --img-scale: 1.1;
+  --title-color: #28666e;
+  --link-icon-translate: 0;
+  --link-icon-opacity: 1;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.link-author{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+.author-date{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+ 
+}
+.author-date p{
+  margin: 0;
+  color: rgb(188, 182, 182);
+  font-size: normal;
+  font-weight: 500;
 }
 .author-name{
-    font-size: 12px;
-    font-weight: bold;
-    color: white;
+font-size: normal;
+margin: 0;
 }
-.title-name{
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
+.blog-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  
+}
+.blog-header h2{
+  color: #1D3340;
+  margin: 0 0 18px 0;
+  font-size: 1.9rem;
+  letter-spacing: 0.06em;
+  transition: color 0.3s ease-out;
+}
+.blog-icons{
+
+display: flex;
+align-items: center;
+color: #D56068;
+
+}
+.likes{
+  height: fit-content;
+  padding: 2px;
+  width: fit-content;
+  color: #1D3340;
+  background: #fff;
+  border: 1px solid white;
+  border-radius: 8px;
 }
 
-.card-image
-{
-    max-width: 100%;
-    height: auto;
-    display: table;
+
+.articles {
+  display: flex;
+  max-width: 800px;
+  flex-direction: row;
+  margin-inline: auto;
+  padding-inline: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+  margin-bottom: 1rem;
 }
 
-.card-text {
-    height: fit-content;
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: larger;
-    background:white ; 
-    mix-blend-mode: screen;  
-}
 
-.btn, .btn-primary {
-    cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
-    padding: 0.25em 0.75em;
-    background:#2A385A;
-    color: white;
-    border: none;
-    font-family: inherit;
-    mix-blend-mode: screen;  
-
-    
-}
-.button-group{
-    display: flex;
-    justify-content: space-around;
-    max-width: 100%;
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
 }
