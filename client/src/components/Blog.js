@@ -1,5 +1,4 @@
 import React from "react";
-import Togglable from "./Togglable";
 import "../styles/blog.css";
 import { AiFillDelete, AiTwotoneLike } from "react-icons/ai";
 import { dt } from "../hooks/date";
@@ -46,11 +45,11 @@ const Blog = ({ blog, addLikes, deleteHandler }) => {
               <p>{dt(blog.createdAt)}</p>
             </div>
           </div>
+          <div className="likes">
+            <p>{blog.likes} people like this blog</p>
+          </div>
         </div>
       </article>
-      <div className="likes">
-        <p>{blog.likes} people like this.</p>
-      </div>
     </section>
   );
 };

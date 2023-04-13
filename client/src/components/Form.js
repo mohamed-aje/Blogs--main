@@ -3,42 +3,12 @@ import Author from "./Author";
 import Content from "./Content";
 import Url from "./Url";
 import "../styles/form.css";
-import blogService from "../services/blogs";
 import { useNavigate } from "react-router";
-import MainNav from "./Navbar";
-import { authActions } from "../store";
-import { useDispatch } from "react-redux";
 
-const Form = () => {
+const Form = ({ formData, addBlog, setFormData }) => {
   const [page, setPage] = useState(0);
-  const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    url: "",
-    content: "",
-  });
 
   const navigate = useNavigate();
-
-  const [blogs, setBlogs] = useState([]);
-  const [message, setMessage] = useState(null);
-
-  const addBlog = (e) => {
-    const blogObject = {
-      title: formData.title,
-      author: formData.author,
-      url: formData.url,
-      content: formData.content,
-    };
-    blogService.create(blogObject).then((returnedObject) => {
-      setBlogs(blogs.concat(returnedObject));
-
-      setFormData("");
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-    });
-  };
 
   const FormTitles = ["Blog Author", "Url & Title", "Blog Content"];
   const PageDisplay = () => {
