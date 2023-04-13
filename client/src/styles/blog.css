@@ -115,14 +115,14 @@ align-items: center;
 color: #D56068;
 
 }
-.likes{
-  height: fit-content;
-  padding: 2px;
-  width: fit-content;
-  color: #1D3340;
-  background: #fff;
-  border: 1px solid white;
-  border-radius: 8px;
+
+.likes p{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+   color: rgb(188, 182, 182);
+  ;
+  
 }
 
 

@@ -55,6 +55,12 @@
     justify-content: center;
     align-items: center;
   }
+  .url-container__with-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+  }
   
   .url-container input {
     margin: 5px;

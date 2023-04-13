@@ -3,19 +3,19 @@ body{
 }
 .navbar {
     overflow: hidden;
-    background-color: #333;
     font-family: Arial;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
     padding: 1rem;
+    mix-blend-mode: screen;
 
   }
   
   /* Links inside the navbar */
   .navbar a {
     float: left;
-    font-size: 16px;
+    font-size: 18px;
     color: white;
     text-align: center;
     padding: 14px 16px;
@@ -29,7 +29,7 @@ body{
   }
   
   .dropdown .dropbtn {
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     outline: none;
     color: white;
