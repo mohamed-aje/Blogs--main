@@ -4,14 +4,20 @@ import Blog from "./Blog";
 import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
 import MainNav from "./Navbar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "../store";
+import Form from "./Form";
+import "../styles/userblog-toggle.css";
 
 const UserBlog = () => {
   const [blogs, setBlogs] = useState([]);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
+  const [formData, setFormData] = useState({
+    title: "",
+    author: "",
+    url: "",
+    content: "",
+  });
+
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
@@ -22,21 +28,42 @@ const UserBlog = () => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("token");
     if (loggedUserJSON) {
       blogService.setToken(loggedUserJSON);
     }
   }, []);
+  const addBlog = (e) => {
+    const blogObject = {
+      title: formData.title,
+      author: formData.author,
+      url: formData.url,
+      content: formData.content,
+    };
+    blogService.create(blogObject).then((returnedObject) => {
+      setBlogs(blogs.concat(returnedObject));
+      window.location.reload();
+
+      window.re;
+      setTimeout(() => {
+        setMessage(null);
+      }, 5000);
+    });
+  };
 
   const deleteHandler = (id) => {
     const blog = blogs.find((b) => b.title);
 
     const confirmed = window.confirm(`remove ${blog.title}`);
     if (confirmed) {
-      blogService.remove(id).then((response) => {
-        setBlogs(blogs.map((blog) => (blog.id !== id ? blog : response)));
-      });
+      blogService
+        .remove(id)
+        .then((response) => {
+          setBlogs(blogs.map((blog) => (blog.id !== id ? blog : response)));
+        })
+        .then(() => setMessage("Delete successful"));
 
       setTimeout(() => {
         setMessage(null);
@@ -60,24 +87,6 @@ const UserBlog = () => {
         }, 5000);
       });
   };
-  const addBlog = (e) => {
-    e.preventDefault();
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url,
-    };
-    blogService.create(blogObject).then((returnedObject) => {
-      setBlogs(blogs.concat(returnedObject));
-
-      setTitle("");
-      setAuthor("");
-      setUrl("");
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-    });
-  };
 
   const blogForm = () =>
     blogs
@@ -92,22 +101,25 @@ const UserBlog = () => {
       ));
 
   return (
-    <div className="container">
+    <React.Fragment>
       <MainNav logout={logout} />
+      <div className="container">
+        <p>{message}</p>
 
-      <Togglable buttonLabel="new blog" name="cancel">
-        <BlogForm
-          handleblog={addBlog}
-          title={title}
-          author={author}
-          url={url}
-          titleChange={({ target }) => setTitle(target.value)}
-          urlChange={({ target }) => setUrl(target.value)}
-          authorChange={({ target }) => setAuthor(target.value)}
-        />
-      </Togglable>
-      {blogForm()}
-    </div>
+        <Togglable
+          className="user-blogs"
+          buttonLabel="Create New Blog"
+          name="Cancel"
+        >
+          <Form
+            addBlog={addBlog}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        </Togglable>
+        {blogForm()}
+      </div>
+    </React.Fragment>
   );
 };
 export default UserBlog;
