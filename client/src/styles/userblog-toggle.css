@@ -14,11 +14,12 @@
     padding: 0.25em 0.75em;
     min-width: 10ch;
     min-height: 44px;
-    background: #C8514B;
-    color: white;
+    background: #fff;
+    color: #2A3A4A;
     border: none;
     font-family: inherit;
     margin: 1rem auto;
     width: 100%;
+    font-size: 24px;
 
 }

@@ -1,8 +1,6 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+width: 600px;
+
   }
   
   .form-container {
@@ -89,14 +87,12 @@
   
   /* PROGRESS BAR */
   .progress-bar {
-    width: 400px;
     height: 10px;
     background-color: white;
     margin-bottom: 50px;
   }
   
   .progress-bar div {
-    width: 33.3%;
     height: 100%;
     background:#D56068;
   }
@@ -132,8 +128,28 @@
       
       
         }
+        .form {
+          max-width: 350px;
+          
+            }     
     .progress-bar {
-      max-width: 200px;
+      max-width: 100%;
+     
+    }
+  }
+  
+  @media screen and (max-width:900px) {
+    .form-container {
+      width: 100%;
+      
+      
+        }
+        .form {
+          width: 600px;
+          
+            }     
+    .progress-bar {
+      max-width: 100%;
      
     }
   }

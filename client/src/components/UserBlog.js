@@ -109,20 +109,14 @@ const UserBlog = () => {
   return (
     <React.Fragment>
       <MainNav logout={logout} />
-      <div className="container">
-        <Togglable
-          className="user-blogs"
-          buttonLabel="Create New Blog"
-          name="Cancel"
-        >
-          <Form
-            addBlog={addBlog}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        </Togglable>
-        {blogForm()}
-      </div>
+      <Togglable
+        className="user-blogs"
+        buttonLabel="Create New Blog"
+        name="Cancel"
+      >
+        <Form addBlog={addBlog} formData={formData} setFormData={setFormData} />
+      </Togglable>
+      {blogForm()}
     </React.Fragment>
   );
 };
