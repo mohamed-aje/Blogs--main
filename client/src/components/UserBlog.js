@@ -43,13 +43,17 @@ const UserBlog = () => {
       url: formData.url,
       content: formData.content,
     };
-    blogService.create(blogObject).then((returnedObject) => {
-      setBlogs(blogs.concat(returnedObject));
-      navigate(`/blogs/${returnedObject.id}`);
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-    });
+    blogService
+      .create(blogObject)
+      .then((returnedObject) => {
+        setBlogs(blogs.concat(returnedObject));
+        navigate(`/blogs/${returnedObject.id}`);
+      })
+      .catch(() => {
+        toast.error("Input is empty or too short.", {
+          autoClose: 1500,
+        });
+      });
   };
 
   const deleteHandler = (id) => {

@@ -48,7 +48,7 @@ blogsRouter.post("/", middleware.userExtractor, async (request, response) => {
     await user.save();
     response.json(savedBlog);
   } catch (error) {
-    response.status(400).json(error);
+    response.status(400).json({ error: "Input is missing or too short" });
   }
 });
 
