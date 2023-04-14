@@ -1,10 +1,6 @@
 import React, { useRef, useState } from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
 import Overlay from "react-bootstrap/Overlay";
-
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
-
 function TooltipCom({ text }) {
   const [show, setShow] = useState(false);
   const target = useRef(null);
