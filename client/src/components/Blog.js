@@ -1,13 +1,15 @@
 import React from "react";
 import "../styles/blog.css";
-import { AiFillDelete, AiTwotoneLike } from "react-icons/ai";
+import { AiFillDelete, AiTwotoneLike, AiFillEdit } from "react-icons/ai";
 import { dt } from "../hooks/date";
 import { cap } from "../hooks/capitalize";
+import { Link, useParams } from "react-router-dom";
+import { truncate } from "../hooks/truncate";
 const Blog = ({ blog, addLikes, deleteHandler }) => {
   if (!blog.id) return null;
-
+  const { id } = useParams();
   return (
-    <section className="articles">
+    <section className="articles" id={`blog-section-${blog.id}`}>
       <article>
         <div className="article-wrapper">
           <figure>
@@ -18,13 +20,17 @@ const Blog = ({ blog, addLikes, deleteHandler }) => {
               <h2>{blog.title}</h2>
               <div className="blog-icons">
                 <AiFillDelete size={28} onClick={deleteHandler}></AiFillDelete>
+                <Link to={`/blogs/${blog.id}/edit`}>
+                  <AiFillEdit size={28}></AiFillEdit>
+                </Link>
+
                 <AiTwotoneLike size={28} onClick={addLikes}></AiTwotoneLike>
               </div>
             </div>
 
-            <p>{blog.content}</p>
+            <p className="content-text">{truncate(blog.content)}</p>
             <div className="link-author">
-              <a href="#" className="read-more">
+              <Link to={`/blogs/${blog.id}`} className="read-more">
                 Read more{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -38,11 +44,11 @@ const Blog = ({ blog, addLikes, deleteHandler }) => {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </Link>
               <p className="author-name">by {cap(blog.author)}</p>
             </div>
             <div className="author-date">
-              <p>{dt(blog.createdAt)}</p>
+              <p> Created {dt(blog.createdAt)}</p>
             </div>
           </div>
           <div className="likes">

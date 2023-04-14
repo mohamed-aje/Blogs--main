@@ -12,11 +12,11 @@ const Form = ({ formData, addBlog, setFormData }) => {
 
   const FormTitles = ["Blog Author", "Url & Title", "Blog Content"];
   const PageDisplay = () => {
-    if (page == 0) {
+    if (page === 0) {
       return <Author formData={formData} setFormData={setFormData} />;
-    } else if (page == 1) {
+    } else if (page === 1) {
       return <Url formData={formData} setFormData={setFormData} />;
-    } else if (page == 2) {
+    } else if (page === 2) {
       return <Content formData={formData} setFormData={setFormData} />;
     }
   };
@@ -25,7 +25,7 @@ const Form = ({ formData, addBlog, setFormData }) => {
       <div className="progress-bar">
         <div
           style={{
-            width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : "100%",
+            width: page === 0 ? "33.3%" : page === 1 ? "66.6%" : "100%",
           }}
         ></div>
       </div>
@@ -36,7 +36,7 @@ const Form = ({ formData, addBlog, setFormData }) => {
         <div className="body">{PageDisplay()}</div>
         <div className="footer">
           <button
-            disabled={page == 0}
+            disabled={page === 0}
             onClick={() => {
               setPage((currPage) => currPage - 1);
             }}
