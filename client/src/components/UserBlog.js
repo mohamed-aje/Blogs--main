@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import blogService from "../services/blogs";
 import Blog from "./Blog";
-import BlogForm from "./BlogForm";
 import Togglable from "./Togglable";
 import MainNav from "./Navbar";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
 import Form from "./Form";
 import "../styles/userblog-toggle.css";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const UserBlog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -20,7 +21,7 @@ const UserBlog = () => {
 
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const logout = () => {
     dispatch(authActions.logout());
   };
@@ -44,9 +45,7 @@ const UserBlog = () => {
     };
     blogService.create(blogObject).then((returnedObject) => {
       setBlogs(blogs.concat(returnedObject));
-      window.location.reload();
-
-      window.re;
+      navigate(`/blogs/${returnedObject.id}`);
       setTimeout(() => {
         setMessage(null);
       }, 5000);
@@ -56,19 +55,23 @@ const UserBlog = () => {
   const deleteHandler = (id) => {
     const blog = blogs.find((b) => b.title);
 
-    const confirmed = window.confirm(`remove ${blog.title}`);
-    if (confirmed) {
-      blogService
-        .remove(id)
-        .then((response) => {
-          setBlogs(blogs.map((blog) => (blog.id !== id ? blog : response)));
+    blogService
+      .remove(id)
+      .then((response) => {
+        setBlogs(blogs.map((blog) => (blog.id !== id ? blog : response)));
+      })
+      .then(() =>
+        toast.success("Delete successful", {
+          autoClose: 2000,
+          toastId: blog.id,
         })
-        .then(() => setMessage("Delete successful"));
-
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
-    }
+      )
+      .catch((err) => {
+        toast.error("You can't perform this action", {
+          autoClose: 2000,
+          toastId: blog.id,
+        });
+      });
   };
 
   const addLikes = (id) => {
@@ -81,7 +84,10 @@ const UserBlog = () => {
         setBlogs(blogs.map((blog) => (blog.id !== id ? blog : returnedBlog)));
       })
       .catch((error) => {
-        setMessage("Something went wrong");
+        toast.error("Something went wrong", {
+          autoClose: 1500,
+          toastId: blog.id,
+        });
         setTimeout(() => {
           setMessage(null);
         }, 5000);
@@ -104,8 +110,6 @@ const UserBlog = () => {
     <React.Fragment>
       <MainNav logout={logout} />
       <div className="container">
-        <p>{message}</p>
-
         <Togglable
           className="user-blogs"
           buttonLabel="Create New Blog"

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import "../styles/loginform.css";
 import signupService from "../services/signup";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { toast } from "react-toastify";
 
 const SignupForm = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +11,6 @@ const SignupForm = () => {
   const [lastName, setlastName] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,14 +24,14 @@ const SignupForm = () => {
           lastName,
         })
         .then(() => {
-          setMessage("You've Successfully signed up!");
+          toast.success(
+            "You've Successfully signed up! you will be redirected to login page!",
+            { autoClose: 2000 }
+          );
         });
       navigate("/login");
     } catch (exception) {
-      setMessage("wrong credentials");
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
+      toast.error("Email exist already!", { autoClose: 2000 });
     }
   };
 

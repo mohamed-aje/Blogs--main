@@ -5,6 +5,7 @@ import "../styles/loginform.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -25,10 +26,11 @@ const LoginForm = () => {
         .then((data) => localStorage.setItem("token", data.token))
         .then(() => {
           dispatch(authActions.signin());
+          toast.success("You are logged in!!", { autoClose: 1500 });
           navigate("/blogs");
         });
     } catch (exception) {
-      setMessage("Wrong credentials");
+      toast.error("Wrong credentials", { autoClose: 1500 });
       setTimeout(() => {
         setMessage(null);
       }, 5000);
