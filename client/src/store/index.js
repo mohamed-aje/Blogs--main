@@ -12,7 +12,7 @@ const authSclice = createSlice({
       state.isLoggedIn = false;
     },
     getLoggedUser() {
-      const loggedUserJSON = window.localStorage.getItem("username");
+      const loggedUserJSON = window.localStorage.getItem("token");
       if (loggedUserJSON) {
         return JSON.parse(loggedUserJSON);
       }
