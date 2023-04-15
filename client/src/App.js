@@ -9,6 +9,7 @@ import Editblogs from "./components/Editblogs";
 import EditForm from "./components/EditForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserProfile from "./components/userProfile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const App = () => {
           path="/signup"
           element={!isLoggedIn ? <SignupForm /> : <Navigate to="/login" />}
         />
+        <Route exact path="/user-profile" element={<UserProfile />} />
         <Route exact path="/blogs/:id" element={<Editblogs />} />
         <Route exact path="/blogs/:id/edit" element={<EditForm />} />
       </Routes>
