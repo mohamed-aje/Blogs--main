@@ -16,28 +16,29 @@ const Blog = ({ blog, addLikes, deleteHandler }) => {
         <div className="article-recent-main">
           <h2 className="article-title">{cap(blog.title)}</h2>
           <p className="article-body">{truncate(blog.content)}</p>
+          <div className="button-blog">
+            <Link to={`/blogs/${blog.id}`} className="article-read-more">
+              Continue Reading ....
+            </Link>
+            <div className="blog-icons">
+              <AiFillDelete size={25} onClick={deleteHandler}></AiFillDelete>
+              <AiFillEdit
+                onClick={() => {
+                  navigate(`/blogs/${blog.id}/edit`);
+                }}
+                size={25}
+              ></AiFillEdit>
 
-          <Link to={`/blogs/${blog.id}`} className="article-read-more">
-            Continue Reading ....
-          </Link>
+              <AiTwotoneLike size={25} onClick={addLikes}></AiTwotoneLike>
+            </div>
+          </div>
         </div>
         <div className="article-recent-secondary">
           <img src={blog.url} className="article-image" />
           <p className="article-info">
-            {cap(blog.author)} | {blog.likes} people like this | Created{" "}
-            {dt(blog.createdAt)}
+            {cap(blog.author)} | {blog.likes} people like this
+            <p>Created {dt(blog.createdAt)}</p>
           </p>
-          <div className="blog-icons">
-            <AiFillDelete size={28} onClick={deleteHandler}></AiFillDelete>
-            <AiFillEdit
-              onClick={() => {
-                navigate(`/blogs/${blog.id}/edit`);
-              }}
-              size={28}
-            ></AiFillEdit>
-
-            <AiTwotoneLike size={28} onClick={addLikes}></AiTwotoneLike>
-          </div>
         </div>
       </article>
     </>

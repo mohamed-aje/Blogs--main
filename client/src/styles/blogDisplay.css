@@ -38,6 +38,7 @@ padding: 0;
     font-size: .800rem;
     font-weight: 300;
     text-align: center;
+    
 }
 .article-recent-main{
     text-align: justify;
@@ -46,6 +47,8 @@ padding: 0;
   }
   .blog-icons{
     text-align: center;
+    height: 3em;
+
   }
   .article-read-more {
     font-weight: 500;
@@ -78,7 +81,7 @@ padding: 0;
     .article-recent {
         flex-direction: row;
         justify-content: space-between;
-        padding: 4px;
+        padding: 2rem;
         margin: 1rem;
         
     }

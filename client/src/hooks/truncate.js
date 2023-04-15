@@ -1,3 +1,3 @@
 export function truncate(words) {
-  return `${words.slice(0, 800)} …`;
+  return `${words.slice(0, 300)}…`;
 }

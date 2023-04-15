@@ -44,7 +44,6 @@ article img {
 
 
 article p {
-  display: inline-flex;
   align-items: flex-end;
   text-decoration: none;
   color: #28666e;
@@ -117,10 +116,15 @@ margin: 0;
   letter-spacing: 0.06em;
   transition: color 0.3s ease-out;
 }
-.blog-icons{
-
-
+.blog-icons svg{
 color: #2A3A4A;
+padding: 2px;
+}
+
+.button-blog{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
 }
 
