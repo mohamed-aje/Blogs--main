@@ -9,16 +9,18 @@ import "../styles/blog.css";
 
 const Editblogs = () => {
   const { id } = useParams();
-  const [blog, setBlog] = useState([]);
+  const [blog, setBlog] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     blogService.get(`${id}`).then((res) => {
       setBlog(res);
     });
-  }, []);
+  }, [id]);
 
-  console.log(blog);
+  if (!blog) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <article>

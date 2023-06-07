@@ -1,6 +1,6 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const authSclice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState: { isLoggedIn: false },
   reducers: {
@@ -11,17 +11,11 @@ const authSclice = createSlice({
       localStorage.removeItem("token");
       state.isLoggedIn = false;
     },
-    getLoggedUser() {
-      const loggedUserJSON = window.localStorage.getItem("token");
-      if (loggedUserJSON) {
-        return JSON.parse(loggedUserJSON);
-      }
-    },
   },
 });
 
-export const authActions = authSclice.actions;
+export const { signin, logout } = authSlice.actions;
 
 export const store = configureStore({
-  reducer: authSclice.reducer,
+  reducer: authSlice.reducer,
 });
