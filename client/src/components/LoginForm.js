@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import blogService from "../services/blogs";
-import loginService from "../services/login";
-import "../styles/loginform.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store";
+import { signin } from "../store"; // Update the import statement
 import { toast } from "react-toastify";
+import "../styles/loginform.css";
+import loginService from "../services/login";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -18,25 +17,20 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const user = await loginService
-        .login({
-          email,
-          password,
-        })
-        .then((data) => localStorage.setItem("token", data.token))
-        .then(() => {
-          dispatch(authActions.signin());
-          toast.success("You are logged in!!", { autoClose: 1500 });
-          navigate("/blogs");
-        });
-    } catch (exception) {
+      const response = await loginService.login({
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", response.token);
+      dispatch(signin());
+      toast.success("You are logged in!!", { autoClose: 1500 });
+      navigate("/blogs");
+    } catch (error) {
       toast.error("Wrong credentials", { autoClose: 1500 });
-      setTimeout(() => {
-        setMessage(null);
-      }, 5000);
+      setPassword(""); // Clear the password field
     }
   };
-
   return (
     <div className="login-box">
       <p style={{ color: "white" }}>{message}</p>
@@ -48,7 +42,7 @@ const LoginForm = () => {
           <input
             type="text"
             name="email"
-            required=""
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -58,7 +52,7 @@ const LoginForm = () => {
           <input
             type="password"
             name="password"
-            required=""
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -69,15 +63,16 @@ const LoginForm = () => {
             Don't have an account? <Link to="/signup">Sign up</Link>
           </p>
         </div>
-        <a className="login-link">
+        <button type="submit" className="login-link">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-          <button>Login</button>
-        </a>
+          Login
+        </button>
       </form>
     </div>
   );
 };
+
 export default LoginForm;
