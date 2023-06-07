@@ -19,8 +19,6 @@ article a::after {
   content: "";
 }
 
-
-
 figure {
   margin: 0;
   padding: 0;
@@ -28,11 +26,13 @@ figure {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 article img {
-  width: 25rem;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  max-height: 400px;
   transform-origin: center;
   transform: scale(var(--img-scale));
   transition: transform 0.4s ease-in-out;
@@ -41,7 +41,6 @@ article img {
 .article__body {
   padding: 24px;
 }
-
 
 article p {
   align-items: flex-end;
@@ -63,21 +62,21 @@ article a .icon {
   transition: all 0.3s;
 }
 
-.link-author{
+.link-author {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0;
 }
-.author-date{
+
+.author-date {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-
- 
 }
-.back-button{
-  width: auto;
+
+.back-button {
+  display: inline-block;
   line-height: 26px;
   font-size: 12px;
   font-weight: 900;
@@ -85,58 +84,79 @@ article a .icon {
   color: #fff;
   text-decoration: none;
   text-align: center;
-  background-color: rgba(239,239,239,1);
+  background-color: rgba(239, 239, 239, 1);
   border: 1px solid #bcbcbc;
   padding: 2px;
-  color: #888; 
-  text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
-
-  
+  color: #888;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
-.author-date p{
+
+.author-date p {
   margin: 0;
   color: rgb(188, 182, 182);
-  font-size: normal;
+  font-size: 14px;
   font-weight: 500;
 }
-.author-name{
-font-size: normal;
-margin: 0;
+
+.author-name {
+  font-size: 14px;
+  margin: 0;
 }
-.blog-header{
+
+.blog-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  
 }
-.blog-header h2{
-  color: #1D3340;
+
+.blog-header h2 {
+  color: #1d3340;
   margin: 0 0 18px 0;
   font-size: 1.9rem;
   letter-spacing: 0.06em;
   transition: color 0.3s ease-out;
 }
-.blog-icons svg{
-color: #2A3A4A;
-padding: 2px;
+
+.blog-icons svg {
+  color: #2a3a4a;
+  padding: 2px;
 }
 
-.button-blog{
+.button-blog {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
 
-.likes p{
+.likes p {
   display: flex;
   text-align: center;
   justify-content: center;
-   color: rgb(188, 182, 182);
-  ;
-  
+  color: rgb(188, 182, 182);
 }
 
+@media screen and (min-width: 768px) {
+  article {
+    padding: 1rem;
+  }
 
+  .article__body {
+    padding: 12px;
+  }
 
+  .blog-header h2 {
+    font-size: 1.5rem;
+  }
 
+  .author-date p {
+    font-size: 12px;
+  }
+
+  .author-name {
+    font-size: 12px;
+  }
+
+  article img {
+    max-height: 600px;
+  }
+}
