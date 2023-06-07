@@ -1,0 +1,20 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./Server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:5001 # Replace 5000 with the desired port number
+    depends_on:
+      - database
+  database:
+    image: mongo
+    ports:
+      - 27017:27017
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
