@@ -1,30 +1,33 @@
 import React, { useEffect } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import UserBlog from "./components/UserBlog";
 import SignupForm from "./components/SignupForm";
 import { useDispatch, useSelector } from "react-redux";
-import { signin } from "./store/index";
+import { signin } from "./store";
 import Editblogs from "./components/Editblogs";
 import EditForm from "./components/EditForm";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserProfile from "./components/userProfile";
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (token && !isLoggedIn) {
       dispatch(signin());
     }
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn, token]);
 
-  // Redirect to the login page if the user is not logged in
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
-  }
+  useEffect(() => {
+    if (!isLoggedIn && !token) {
+      navigate("/login");
+    }
+  }, [navigate, isLoggedIn, token]);
 
   return (
     <React.Fragment>
