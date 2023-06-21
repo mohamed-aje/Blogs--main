@@ -24,13 +24,14 @@ const LoginForm = () => {
 
       localStorage.setItem("token", response.token);
       dispatch(signin());
-      toast.success("You are logged in!!", { autoClose: 1500 });
+      toast.success("You are logged in!", { autoClose: 1500 });
       navigate("/blogs");
     } catch (error) {
       toast.error("Wrong credentials", { autoClose: 1500 });
       setPassword(""); // Clear the password field
     }
   };
+
   return (
     <div className="login-box">
       <p style={{ color: "white" }}>{message}</p>
@@ -42,21 +43,21 @@ const LoginForm = () => {
           <input
             type="text"
             name="email"
+            placeholder="Email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label>Email</label>
         </div>
         <div className="user-box">
           <input
             type="password"
             name="password"
             required
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label>Password</label>
         </div>
         <div className="signup">
           <p className="signup-text">

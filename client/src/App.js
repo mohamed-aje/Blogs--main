@@ -24,10 +24,10 @@ const App = () => {
   }, [dispatch, isLoggedIn, token]);
 
   useEffect(() => {
-    if (!isLoggedIn && !token) {
+    if (!isLoggedIn && !token && location.pathname !== "/signup") {
       navigate("/login");
     }
-  }, [navigate, isLoggedIn, token]);
+  }, [navigate, isLoggedIn, token, location]);
 
   return (
     <React.Fragment>

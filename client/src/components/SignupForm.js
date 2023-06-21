@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
@@ -16,87 +16,95 @@ const SignupForm = () => {
     e.preventDefault();
 
     try {
-      const user = await signupService
-        .signup({
-          email,
-          password,
-          firstName,
-          lastName,
-        })
-        .then(() => {
-          toast.success(
-            "You've Successfully signed up! you will be redirected to login page!",
-            { autoClose: 2000 }
-          );
-        });
+      await signupService.signup({
+        email,
+        password,
+        firstName,
+        lastName,
+      });
+
+      toast.success(
+        "You've successfully signed up! You will be redirected to the login page!",
+        {
+          autoClose: 2000,
+        }
+      );
+
       navigate("/login");
     } catch (exception) {
-      toast.error("Email exist already!", { autoClose: 2000 });
+      toast.error("Email already exists!", {
+        autoClose: 2000,
+      });
     }
   };
 
   return (
     <div className="login-box">
-      <p style={{ color: "white" }}>{message}</p>
       <div className="text-container">
         <h2>Blogs Register</h2>
-      </div>{" "}
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="user-box">
           <input
             type="text"
+            id="firstname"
             name="firstname"
-            required=""
+            placeholder="First Name"
+            required
             value={firstName}
-            onChange={(e) => setfirstName(e.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
+            autoComplete="given-name"
           />
-          <label>First Name</label>
         </div>
         <div className="user-box">
           <input
             type="text"
+            id="lastName"
             name="lastName"
-            required=""
+            placeholder="Last Name"
+            required
             value={lastName}
-            onChange={(e) => setlastName(e.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
+            autoComplete="family-name"
           />
-          <label>Last Name</label>
         </div>
         <div className="user-box">
           <input
-            type="text"
+            type="email"
+            id="email"
             name="email"
-            required=""
+            placeholder="Email"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
           />
-          <label>Email</label>
         </div>
-
         <div className="user-box">
           <input
             type="password"
+            id="password"
             name="password"
-            required=""
+            placeholder="Password"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            autoComplete="new-password"
           />
-          <label>Password</label>
         </div>
         <div className="signup">
-          <p className="signup-text">
-            Already Have an account? <Link to="/login">Sign In</Link>
+          <p>
+            Already have an account? <Link to="/login">Sign In</Link>
           </p>
         </div>
-        <a className="login-link">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <button>Sign up</button>
-        </a>
+        <div className="login-link">
+          <button type="submit" className="login-button">
+            Sign up
+          </button>
+        </div>
       </form>
     </div>
   );
 };
+
 export default SignupForm;
